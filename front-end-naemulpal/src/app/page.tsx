@@ -9,8 +9,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
-      <header><Header/></header>
-      <main></main>
+      <Header/>
+      <main className="">main</main>
     </>
   )
 }
