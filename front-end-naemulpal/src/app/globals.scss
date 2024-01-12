@@ -9,20 +9,13 @@
 
 @layer base {
 	body {
+		max-width: 1536px;
 		font-family: "NanumSquare";
 		color: white;
     	background-color: white;
-		max-width: 1536px;
 		position: relative;
 		margin-left: auto;
 		margin-right: auto;
-	}
-	nav {
-		max-width: 1536px;
-		width: 100%;
-		font-size: 1rem;
-		line-height: 2rem;
-		font-weight: 800;
 	}
 	h1 {
 		font-size: 1.5rem;
