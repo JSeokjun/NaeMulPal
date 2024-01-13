@@ -1,5 +1,7 @@
 import { Metadata } from "next";
-import Header from "@/components/header/header";
+import Header from "@/components/header";
+import EventCard from "@/components/event_card";
+import EventSmallCard from "@/components/event_small_card";
 
 export const metadata: Metadata = {
   title: '메인',
@@ -10,7 +12,26 @@ export default function Home() {
   return (
     <>
       <Header/>
-      <main className="">main</main>
+      <main className="">
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          src={require('@/assets/video/sample-30s.mp4')}
+        />
+        <div className="">
+          <div className="text-3xl font-extrabold text-center pt-20 pb-5 mobile:text-2xl">EVENT</div>
+          <div className="w-[90%] mx-auto">
+            <EventCard></EventCard>
+            <div className="flex mobile:overflow-x-auto mobile:whitespace-nowrap">
+              <EventSmallCard></EventSmallCard>
+              <EventSmallCard></EventSmallCard>
+              <EventSmallCard></EventSmallCard>
+            </div>
+          </div>
+        </div>
+      </main>
     </>
   )
 }
