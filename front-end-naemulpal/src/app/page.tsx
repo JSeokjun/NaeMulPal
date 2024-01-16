@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import Header from "@/components/header";
 import EventCard from "@/components/event_card";
 import EventSmallCard from "@/components/event_small_card";
+import ProductCard from "@/components/product_card";
 
 export const metadata: Metadata = {
   title: '메인',
@@ -13,22 +14,36 @@ export default function Home() {
     <>
       <Header/>
       <main className="">
-        <video
+        {/*<video
           autoPlay
           loop
           muted
           playsInline
           src={require('@/assets/video/sample-30s.mp4')}
-        />
+        />*/}
         <div className="">
           <div className="text-3xl font-extrabold text-center pt-20 pb-5 mobile:text-2xl">EVENT</div>
           <div className="w-[90%] mx-auto">
-            <EventCard></EventCard>
+            <EventCard/>
             <div className="flex mobile:overflow-x-auto mobile:whitespace-nowrap">
-              <EventSmallCard></EventSmallCard>
-              <EventSmallCard></EventSmallCard>
-              <EventSmallCard></EventSmallCard>
+              {/*Caution: Please use square images with a 1:1 aspect ratio.*/}
+              <EventSmallCard Link="#none" BackColor="bg-[#E4F2FF]" ImageName="airpod.png" TitleText="2024년 새해 다짐은 노캔으로 집중!" SubText="올해 가장 이루고 싶은 것은 무엇인가요?"/>
+              <EventSmallCard Link="#none" BackColor="bg-[#D8DFE7]" ImageName="airpod.png" TitleText="2024년 새해 다짐은 노캔으로 집중!" SubText="올해 가장 이루고 싶은 것은 무엇인가요?"/>
+              <EventSmallCard Link="#none" lastCard={true} BackColor="bg-[#E8DDC9]" ImageName="airpod.png" TitleText="2024년 새해 다짐은 노캔으로 집중!" SubText="올해 가장 이루고 싶은 것은 무엇인가요?"/>
             </div>
+          </div>
+          <div className="text-center text-sm font-extrabold mt-3 mb-12">
+            <a href="#none">더 보러 가기 +</a>
+          </div>
+        </div>
+        <div className="bg-[#F4F4F4]">
+          <div className="text-3xl font-extrabold text-center pt-20 pb-8 mobile:text-2xl">PRODUCT</div>
+          <div className="flex overflow-x-auto whitespace-nowrap">
+            {/*Caution: Please use square images with a 1:1 aspect ratio.*/}
+            <ProductCard Link={"#none"} ImageName={"airpod.png"} titleText={"Camera"}/>
+            <ProductCard Link={"#none"} ImageName={"airpod.png"} titleText={"Camera"}/>
+            <ProductCard Link={"#none"} ImageName={"airpod.png"} titleText={"Camera"}/>
+            <ProductCard Link={"#none"} ImageName={"airpod.png"} titleText={"Camera"}/>
           </div>
         </div>
       </main>

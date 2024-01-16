@@ -1,6 +1,10 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+    const router = useRouter();
+
     return (
         <header className="flex max-w-full h-20 bg-black">
             <h1 className="w-1/5 leading-80 pl-7 tracking-wider mobile:w-1/2"><a href="/">NAEMULPAL</a></h1>
@@ -41,8 +45,8 @@ export default function Header() {
             <div className="flex w-1/5 leading-80 mobile:w-1/2">
                 <div className="w-1/4 mobile:w-2/4"></div>
                 <button className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/search-svgrepo-com.svg" alt={"검색창 열기"} width={"24"} height={"24"}></Image></button>
-                <button className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/user-svgrepo-com.svg" alt={"검색창 열기"} width={"25"} height={"25"}></Image></button>
-                <button className="relative w-1/4 ml-4 mobile:w-1/4 mobile:mr-4"><Image className="m-auto" src="/img/bag-svgrepo-com.svg" alt={"검색창 열기"} width={"26"} height={"26"}></Image></button>
+                <button className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/user-svgrepo-com.svg" alt={"내 정보 열기"} width={"25"} height={"25"}></Image></button>
+                <button onClick={()=>router.push('/cart')} className="relative w-1/4 ml-4 mobile:w-1/4 mobile:mr-4"><Image className="m-auto" src="/img/bag-svgrepo-com.svg" alt={"장바구니 열기"} width={"26"} height={"26"}></Image></button>
                 <button className="relative w-0 ml-4 invisible mobile:visible mobile:w-1/4 mobile:visible mobile:mr-4"><Image className="m-auto mobile:w-" src="/img/detail-2-svgrepo-com.svg" alt={"메뉴 열기"} width={"26"} height={"26"}></Image></button>
             </div>
         </header>
