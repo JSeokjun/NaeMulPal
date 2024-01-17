@@ -9,10 +9,12 @@ export default function Header() {
 
     const openSearchModal = () => {
         setSearchModalOpen(true);
+        document.body.style.overflow = 'hidden';
     };
 
     const closeSearchModal = () => {
         setSearchModalOpen(false);
+        document.body.style.overflow = '';
     };
 
     return (
