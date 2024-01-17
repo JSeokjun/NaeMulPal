@@ -3,6 +3,7 @@ import Header from "@/components/header";
 import EventCard from "@/components/event_card";
 import EventSmallCard from "@/components/event_small_card";
 import ProductCard from "@/components/product_card";
+import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
   title: '메인',
@@ -47,6 +48,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <Footer></Footer>
     </>
   )
 }
