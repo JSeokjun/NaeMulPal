@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GoodsCard from "@/components/goods_card";
 
 export default function Header() {
@@ -33,6 +33,45 @@ export default function Header() {
         handleSearch();
       }
     };
+
+    // Info Modal ON/OFF
+    const [isMyInfoModalOpen, setMyInfoModalOpen] = useState(false);
+
+    const closeMyInfoModal = () => {
+        setMyInfoModalOpen(false);
+    };
+    
+    useEffect(() => {
+        const handleOutsideClick = (event: MouseEvent) => {
+            const modal = document.getElementById("myInfoModal");
+        
+            if (modal && !modal.contains(event.target as Node)) {
+                closeMyInfoModal();
+            }
+        };
+    
+        if (isMyInfoModalOpen) {
+            document.addEventListener("click", handleOutsideClick);
+        }
+    
+        return () => {
+            document.removeEventListener("click", handleOutsideClick);
+        };
+    }, [isMyInfoModalOpen]);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            closeMyInfoModal();
+        };
+
+        if (isMyInfoModalOpen) {
+            document.addEventListener("scroll", handleScroll);
+        }
+
+        return () => {
+            document.removeEventListener("scroll", handleScroll);
+        };
+    }, [isMyInfoModalOpen]);
 
     return (
         <header className="flex max-w-full h-20 bg-black">
@@ -74,7 +113,16 @@ export default function Header() {
             <div className="flex w-1/5 leading-80 mobile:w-auto mobile:ml-auto">
                 <div className="w-1/4 mobile:w-0"></div>
                 <button onClick={openSearchModal} className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/search-svgrepo-com.svg" alt={"검색창 열기"} width={"24"} height={"24"}></Image></button>
-                <button className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/user-svgrepo-com.svg" alt={"내 정보 열기"} width={"25"} height={"25"}></Image></button>
+                <button onClick={()=>setMyInfoModalOpen(!isMyInfoModalOpen)} className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/user-svgrepo-com.svg" alt={"내 정보 열기"} width={"25"} height={"25"}></Image></button>
+                {isMyInfoModalOpen && (
+                    <div id="myInfoModal" className="fixed mt-20 ml-32">
+                        <div className="w-[110px] bg-white border-2 border-black p-3 text-center leading-normal">
+                            <p className="text-black">장석준님</p>
+                            <p className="text-black">안녕하세요!</p>
+                            <div className="absolute w-4 h-4 bg-white border-t-2 border-l-2 border-black rotate-45 top-[-8px] left-1/2 -translate-x-1/2"></div>
+                        </div>
+                    </div>
+                )}
                 <button onClick={()=>router.push('/cart')} className="relative w-1/4 ml-4 mobile:w-auto mobile:ml-0 mobile:mr-3 mobile:px-2 mobile:my-4"><Image className="m-auto" src="/img/bag-svgrepo-com.svg" alt={"장바구니 열기"} width={"26"} height={"26"}></Image></button>
                 <button onClick={openSearchModal} className="relative w-0 ml-4 invisible mobile:visible mobile:w-auto mobile:visible mobile:ml-0 mobile:px-2 mobile:mr-5 mobile:my-4"><Image className="m-auto mobile:w-" src="/img/detail-2-svgrepo-com.svg" alt={"메뉴 열기"} width={"26"} height={"26"}></Image></button>
             </div>
