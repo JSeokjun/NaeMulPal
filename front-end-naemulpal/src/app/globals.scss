@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer base {
+	html {
+		background-color: black;
+	}
 	body {
 		max-width: 1536px;
 		font-family: "NanumSquare";

@@ -2,9 +2,13 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import GoodsCard from "@/components/goods_card";
 
 export default function Header() {
+    // Link
     const router = useRouter();
+
+    // Search Modal ON/OFF
     const [isSearchModalOpen, setSearchModalOpen] = useState(false);
 
     const openSearchModal = () => {
@@ -15,6 +19,19 @@ export default function Header() {
     const closeSearchModal = () => {
         setSearchModalOpen(false);
         document.body.style.overflow = '';
+    };
+
+    // Search Function
+    const [searchQuery, setSearchQuery] = useState<string>('');
+
+    const handleSearch = () => {
+        console.log('검색어:', searchQuery); // temporary
+    };
+  
+    const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        handleSearch();
+      }
     };
 
     return (
@@ -59,21 +76,44 @@ export default function Header() {
                 <button onClick={openSearchModal} className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/search-svgrepo-com.svg" alt={"검색창 열기"} width={"24"} height={"24"}></Image></button>
                 <button className="relative w-1/4 ml-4 mobile:invisible mobile:w-0 mobile:ml-0"><Image className="m-auto" src="/img/user-svgrepo-com.svg" alt={"내 정보 열기"} width={"25"} height={"25"}></Image></button>
                 <button onClick={()=>router.push('/cart')} className="relative w-1/4 ml-4 mobile:w-auto mobile:ml-0 mobile:mr-3 mobile:px-2 mobile:my-4"><Image className="m-auto" src="/img/bag-svgrepo-com.svg" alt={"장바구니 열기"} width={"26"} height={"26"}></Image></button>
-                <button className="relative w-0 ml-4 invisible mobile:visible mobile:w-auto mobile:visible mobile:ml-0 mobile:px-2 mobile:mr-5 mobile:my-4"><Image className="m-auto mobile:w-" src="/img/detail-2-svgrepo-com.svg" alt={"메뉴 열기"} width={"26"} height={"26"}></Image></button>
+                <button onClick={openSearchModal} className="relative w-0 ml-4 invisible mobile:visible mobile:w-auto mobile:visible mobile:ml-0 mobile:px-2 mobile:mr-5 mobile:my-4"><Image className="m-auto mobile:w-" src="/img/detail-2-svgrepo-com.svg" alt={"메뉴 열기"} width={"26"} height={"26"}></Image></button>
             </div>
             {isSearchModalOpen && (
                 <>
-                <div className="fixed top-0 left-0 w-full h-full bg-black text-white overflow-hidden">
+                <div className="fixed top-0 max-w-[1536px] w-full h-full bg-black text-white overflow-y-auto overflow-x-hidden z-10">
                     <div className="flex h-20">
                         <h1 className="leading-80 pl-7 tracking-wider"><a href="/">NAEMULPAL</a></h1>
-                        <button onClick={closeSearchModal} className="mr-7 my-4 ml-auto"><Image src="/img/cancel-svgrepo-com.svg" alt={"내 정보 열기"} width={"40"} height={"40"}></Image></button>
+                        <button onClick={closeSearchModal} className="mr-3 my-4 ml-auto"><Image src="/img/cancel-svgrepo-com.svg" alt={"검색창 닫기"} width={"40"} height={"40"}></Image></button>
                     </div>
-                    <div className="text-center">
-                        <input
-                            type="text"
-                            placeholder="검색어를 입력해 주세요."
-                            className="w-96 p-2 border border-gray-300 text-black"
-                        />
+                    <div className="w-11/12 mx-auto">
+                        <div className="flex text-center text-xl h-11 w-[500px] max-w-full mt-9 mb-16 mx-auto border-b-2">
+                            <input
+                                type="text"
+                                placeholder="검색어를 입력해 주세요."
+                                className="w-11/12 p-2 bg-black text-white outline-none"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onKeyDown={handleKeyPress}
+                            />
+                            <button onClick={handleSearch} className="relative ml-auto px-3"><Image className="m-auto" src="/img/search-svgrepo-com.svg" alt={"검색창 열기"} width={"24"} height={"24"}></Image></button>
+                        </div>
+                        <div className="w-[800px] mx-auto">
+                            <p className="text-xl mb-5 font-bold">인기 검색어</p>
+                            <div className="flex flex-wrap mb-5 mobile:max-w-[400px]">
+                                <div className="mr-8 mb-8 mobile:mr-24"># 인기 검색어</div>
+                                <div className="mr-8 mb-8 mobile:mr-24"># 인기 검색어</div>
+                                <div className="mr-8 mb-8 mobile:mr-24"># 인기 검색어</div>
+                                <div className="mr-8 mb-8 mobile:mr-24"># 인기 검색어</div>
+                                <div className="mr-8 mb-8 mobile:mr-24"># 인기 검색어</div>
+                                <div className="mr-8 mb-8 mobile:mr-24"># 인기 검색어</div>
+                            </div>
+                            <p className="text-xl mt-8 mb-5 font-bold">추천 상품</p>
+                            <div className="flex flex-wrap mobile:flex-none mobile:max-w-[300px]">
+                                <GoodsCard Link={"#none"} BackColor={"bg-white"} ImageName={"airpod.png"} TitleText={"추천 제품명"} SubText={"설명설명블라블라"}></GoodsCard>
+                                <GoodsCard Link={"#none"} BackColor={"bg-white"} ImageName={"airpod.png"} TitleText={"추천 제품명"} SubText={"설명설명블라블라"}></GoodsCard>
+                                <GoodsCard Link={"#none"} BackColor={"bg-white"} ImageName={"airpod.png"} TitleText={"추천 제품명"} SubText={"설명설명블라블라"}></GoodsCard>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 </>
